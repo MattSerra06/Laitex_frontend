@@ -1,0 +1,81 @@
+<mat-sidenav-container class="workspace">
+  <mat-sidenav #drawer class="workspace__sidebar" mode="side" [opened]="true">
+    <app-file-tree></app-file-tree>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="workspace__toolbar">
+      <div class="workspace__toolbar-left">
+        <button mat-icon-button type="button" (click)="drawer.toggle()" matTooltip="Toggle project files">
+          <mat-icon>{{ drawer.opened ? 'menu_open' : 'menu' }}</mat-icon>
+        </button>
+        <div class="workspace__brand">
+          <span class="workspace__brand-title">Laitex Studio</span>
+          <span class="workspace__brand-subtitle">Lightweight LaTeX authoring</span>
+        </div>
+      </div>
+
+      <div class="workspace__toolbar-actions">
+        <span class="workspace__render-status">{{ renderStatus() }}</span>
+        <button mat-stroked-button type="button" color="accent" (click)="exportPdf()" matTooltip="Export as PDF">
+          <mat-icon>download</mat-icon>
+          Export
+        </button>
+        <button mat-flat-button type="button" color="accent" (click)="renderDocument()" matTooltip="Render LaTeX">
+          <mat-icon>play_arrow</mat-icon>
+          Render
+        </button>
+        <button mat-icon-button type="button" (click)="toggleTheme()" [matTooltip]="themeTooltip()">
+          <mat-icon>{{ themeIcon() }}</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+
+    <div class="workspace__body">
+      <section class="workspace__panel workspace__panel--editor">
+        <header class="panel-header">
+          <div class="panel-header__titles">
+            <h2>LaTeX source</h2>
+            <p>Capture your ideas in plain text. Autocomplete and syntax highlighting can be added later.</p>
+          </div>
+          <div class="panel-header__actions">
+            <button mat-icon-button type="button" (click)="renderDocument()" matTooltip="Render preview">
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+        </header>
+        <mat-divider></mat-divider>
+        <mat-form-field appearance="outline" class="editor-field">
+          <textarea
+            matInput
+            class="editor-field__textarea"
+            [value]="latexSource()"
+            (input)="onSourceChange(($event.target as HTMLTextAreaElement).value)"
+            rows="24"
+          ></textarea>
+        </mat-form-field>
+      </section>
+
+      <section class="workspace__panel workspace__panel--preview">
+        <header class="panel-header">
+          <div class="panel-header__titles">
+            <h2>Rendered preview</h2>
+            <p>A calm representation of the compiled PDF. Rendering is simulated for now.</p>
+          </div>
+        </header>
+        <mat-divider></mat-divider>
+        <div class="preview-surface" cdkScrollable>
+          <div class="preview-page">
+            <header class="preview-page__header">
+              <span>PDF preview</span>
+              <mat-icon>picture_as_pdf</mat-icon>
+            </header>
+            <pre class="preview-page__content">{{ renderedLatex() }}</pre>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <app-chat-widget></app-chat-widget>
+  </mat-sidenav-content>
+</mat-sidenav-container>

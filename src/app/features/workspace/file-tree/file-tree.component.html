@@ -1,0 +1,42 @@
+<section class="file-tree">
+  <header class="file-tree__header">
+    <div class="file-tree__title-group">
+      <mat-icon>folder_open</mat-icon>
+      <h2>Project structure</h2>
+    </div>
+    <div class="file-tree__actions">
+      <button mat-icon-button type="button" (click)="expandAll()" matTooltip="Expand all">
+        <mat-icon>unfold_more</mat-icon>
+      </button>
+      <button mat-icon-button type="button" (click)="collapseAll()" matTooltip="Collapse all">
+        <mat-icon>unfold_less</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="file-tree__tree">
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild" class="file-node file-node--folder">
+      <div class="file-node__content" matTreeNodePadding>
+        <button
+          mat-icon-button
+          matTreeNodeToggle
+          class="file-node__toggle"
+          [attr.aria-label]="'Toggle ' + node.name"
+        >
+          <mat-icon>{{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}</mat-icon>
+        </button>
+        <mat-icon class="file-node__icon">folder</mat-icon>
+        <span class="file-node__label">{{ node.name }}</span>
+      </div>
+      <div class="file-node__children" [class.file-node__children--expanded]="treeControl.isExpanded(node)">
+        <ng-container matTreeNodeOutlet></ng-container>
+      </div>
+    </mat-nested-tree-node>
+
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding class="file-node file-node--file">
+      <span class="file-node__spacer"></span>
+      <mat-icon class="file-node__icon">{{ node.icon ?? 'description' }}</mat-icon>
+      <span class="file-node__label">{{ node.name }}</span>
+    </mat-tree-node>
+  </mat-tree>
+</section>

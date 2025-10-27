@@ -1,0 +1,67 @@
+<div class="chat-widget">
+  <button
+    *ngIf="!isOpen()"
+    mat-fab
+    color="primary"
+    class="chat-widget__trigger"
+    type="button"
+    (click)="openChat()"
+    aria-label="Open assistant chat"
+  >
+    <mat-icon>chat</mat-icon>
+  </button>
+
+  <section
+    *ngIf="isOpen()"
+    class="chat-panel"
+    [class.chat-panel--expanded]="isExpanded()"
+    cdkDrag
+    [cdkDragDisabled]="isExpanded()"
+    cdkDragBoundary="body"
+  >
+    <header class="chat-panel__header" cdkDragHandle>
+      <div class="chat-panel__title">
+        <mat-icon>smart_toy</mat-icon>
+        <h3>{{ title() }}</h3>
+      </div>
+      <div class="chat-panel__actions">
+        <button
+          mat-icon-button
+          type="button"
+          (click)="toggleExpanded()"
+          [attr.aria-label]="isExpanded() ? 'Exit full screen' : 'Expand chat'"
+        >
+          <mat-icon>{{ isExpanded() ? 'close_fullscreen' : 'open_in_full' }}</mat-icon>
+        </button>
+        <button mat-icon-button type="button" (click)="closeChat()" aria-label="Close chat">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </header>
+
+    <div class="chat-panel__body">
+      <mat-list>
+        <mat-list-item *ngFor="let message of messages()" class="chat-message" [class.chat-message--assistant]="message.author === 'Assistant'">
+          <div matListItemTitle>{{ message.author }}</div>
+          <div matListItemLine>{{ message.text }}</div>
+          <div matListItemMeta>{{ message.timestamp }}</div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+
+    <footer class="chat-panel__composer">
+      <mat-form-field appearance="outline">
+        <textarea
+          matInput
+          rows="3"
+          placeholder="Ask a question or share feedback..."
+          [value]="draft()"
+          (input)="onDraftChange(($event.target as HTMLTextAreaElement).value)"
+        ></textarea>
+      </mat-form-field>
+      <button mat-icon-button color="primary" type="button" (click)="sendMessage()" [disabled]="!draft().trim()">
+        <mat-icon>send</mat-icon>
+      </button>
+    </footer>
+  </section>
+</div>
