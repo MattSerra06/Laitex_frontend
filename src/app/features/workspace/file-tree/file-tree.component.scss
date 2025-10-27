@@ -1,0 +1,98 @@
+:host {
+  display: block;
+}
+
+.file-tree {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--text-primary);
+}
+
+.file-tree__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--surface-border);
+  color: var(--text-secondary);
+}
+
+.file-tree__title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.file-tree__title-group h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.file-tree__actions {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.file-tree__tree {
+  padding: 0.5rem 0.75rem 1.5rem;
+  overflow: auto;
+  flex: 1 1 auto;
+}
+
+.file-node {
+  display: block;
+  border-radius: 0.5rem;
+  color: inherit;
+}
+
+.file-node__content,
+.file-node--file {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.25rem;
+  padding-right: 0.25rem;
+  border-radius: 0.5rem;
+  color: inherit;
+}
+
+.file-node__content:hover,
+.file-node--file:hover {
+  background-color: var(--muted);
+}
+
+.file-node__toggle {
+  margin-right: 0.125rem;
+}
+
+.file-node__icon {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.file-node__label {
+  font-size: 0.92rem;
+}
+
+.file-node__spacer {
+  display: inline-flex;
+  width: 2.4rem;
+}
+
+.file-node__children {
+  margin-left: 1.5rem;
+  border-left: 1px solid var(--surface-border);
+  padding-left: 0.75rem;
+}
+
+.file-node__children--expanded {
+  border-color: rgba(79, 99, 148, 0.25);
+}
+
+.mat-tree-node,
+.mat-nested-tree-node {
+  background: transparent !important;
+}
