@@ -1,0 +1,129 @@
+:host {
+  display: block;
+  height: 100%;
+  color: var(--text-primary);
+}
+
+.workspace {
+  height: 100vh;
+  background: var(--surface-base);
+
+  &__drawer {
+    width: clamp(220px, 24vw, 300px);
+    border-right: 1px solid var(--outline);
+    background: var(--surface-elevated);
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem) 3rem;
+    align-items: start;
+  }
+
+  &__panel {
+    min-height: 36rem;
+    background: var(--surface-elevated);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    border: 1px solid var(--outline);
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  }
+
+  &__panel--editor {
+    background: var(--surface-base);
+    box-shadow: none;
+    border: none;
+    padding: 0;
+  }
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  padding: 0 1.25rem;
+  background: linear-gradient(120deg, color-mix(in srgb, var(--surface-elevated) 92%, transparent) 0%, transparent 120%);
+  border-bottom: 1px solid var(--outline);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  &__section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__menu {
+    display: none;
+  }
+
+  &__branding {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__logo {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.75rem;
+    display: grid;
+    place-items: center;
+    background: var(--accent-subtle);
+    color: var(--accent-strong);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  &__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  &__name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  &__subtitle {
+    color: var(--text-muted);
+  }
+
+  &__primary {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  mat-divider {
+    height: 2rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .workspace {
+    &__content {
+      grid-template-columns: minmax(0, 1fr);
+      padding-inline: clamp(1rem, 4vw, 1.5rem);
+    }
+
+    &__panel--preview {
+      order: 3;
+    }
+  }
+
+  .topbar {
+    &__menu {
+      display: inline-flex;
+    }
+
+    &__subtitle {
+      display: none;
+    }
+  }
+}

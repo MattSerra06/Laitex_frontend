@@ -1,0 +1,25 @@
+<section class="editor" aria-label="LaTeX editor">
+  <header class="editor__toolbar">
+    <h2>LaTeX Source</h2>
+    <div class="editor__actions">
+      <button mat-stroked-button color="primary" type="button" (click)="clear()">
+        <mat-icon>backspace</mat-icon>
+        Clear
+      </button>
+      <button mat-flat-button color="primary" type="button">
+        <mat-icon>play_arrow</mat-icon>
+        Compile
+      </button>
+    </div>
+  </header>
+  <mat-form-field appearance="outline" class="editor__field">
+    <textarea
+      matInput
+      [(ngModel)]="content()"
+      (ngModelChange)="content.set($event)"
+      spellcheck="false"
+      cdkTextareaAutosize
+      class="editor__textarea"
+    ></textarea>
+  </mat-form-field>
+</section>
