@@ -1,0 +1,88 @@
+@use 'sass:color';
+
+:root {
+  font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.4;
+  font-weight: 400;
+  color: #1c1c28;
+  background-color: #f6f7fb;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.theme-light {
+  color-scheme: light;
+  --color-text-primary: #1f1d2b;
+  --color-text-secondary: #3d3a54;
+  --color-text-muted: #6c6886;
+  --color-surface: #f7f8fc;
+  --color-surface-alt: #eef0fa;
+  --color-surface-raised: #ffffffcc;
+  --color-paper: #ffffff;
+  --color-border-subtle: rgba(51, 45, 81, 0.12);
+  --color-border-strong: rgba(51, 45, 81, 0.28);
+  --color-accent-soft: rgba(160, 180, 255, 0.28);
+  --color-accent-strong: #4a63f3;
+  --shadow-subtle: 0 8px 18px rgba(60, 64, 82, 0.08);
+  --shadow-elevated: 0 24px 40px rgba(60, 64, 82, 0.12);
+  --shadow-floating: 0 18px 32px rgba(78, 91, 173, 0.2);
+  --shadow-paper: 0 14px 35px rgba(43, 51, 120, 0.15);
+}
+
+.theme-dark {
+  color-scheme: dark;
+  --color-text-primary: #f4f4ff;
+  --color-text-secondary: #d3d7ff;
+  --color-text-muted: #9aa0d0;
+  --color-surface: #101322;
+  --color-surface-alt: #181b2b;
+  --color-surface-raised: rgba(26, 29, 44, 0.94);
+  --color-paper: #1d2133;
+  --color-border-subtle: rgba(148, 153, 220, 0.14);
+  --color-border-strong: rgba(148, 153, 220, 0.32);
+  --color-accent-soft: rgba(111, 132, 255, 0.24);
+  --color-accent-strong: #9caaff;
+  --shadow-subtle: 0 8px 18px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 24px 50px rgba(0, 0, 0, 0.48);
+  --shadow-floating: 0 18px 42px rgba(0, 0, 0, 0.45);
+  --shadow-paper: 0 14px 40px rgba(0, 0, 0, 0.35);
+  background-color: #101322;
+}
+
+.mat-app-background {
+  background-color: transparent;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+mat-icon {
+  font-variation-settings: 'OPSZ' 24;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color.mix(#8f9be3, #4a63f3, 40%);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
