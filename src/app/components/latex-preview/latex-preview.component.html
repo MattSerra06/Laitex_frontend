@@ -1,0 +1,33 @@
+<section class="preview" aria-label="LaTeX preview">
+  <header class="preview__toolbar">
+    <div class="preview__title">
+      <h2>PDF Preview</h2>
+      <p *ngIf="compiledAt(); else idle" class="preview__timestamp">
+        Last compiled {{ compiledAt() | date: 'shortTime' }}
+      </p>
+      <ng-template #idle>
+        <p class="preview__timestamp">No compilation yet</p>
+      </ng-template>
+    </div>
+    <div class="preview__actions">
+      <button mat-icon-button type="button" matTooltip="Download PDF">
+        <mat-icon>download</mat-icon>
+      </button>
+      <button mat-icon-button type="button" matTooltip="Share">
+        <mat-icon>ios_share</mat-icon>
+      </button>
+      <button mat-flat-button color="primary" type="button" (click)="render()" [disabled]="isLoading()">
+        <mat-icon>play_circle</mat-icon>
+        {{ isLoading() ? 'Rendering…' : 'Render PDF' }}
+      </button>
+    </div>
+  </header>
+  <div class="preview__surface" [class.preview__surface--loading]="isLoading()">
+    <div class="preview__placeholder" *ngIf="!compiledAt()">
+      <mat-icon>picture_as_pdf</mat-icon>
+      <p>Your rendered PDF will appear here.</p>
+      <small>Click “Render PDF” to simulate a compilation.</small>
+    </div>
+    <iframe *ngIf="compiledAt()" title="PDF preview" srcdoc="<p>Mock PDF preview</p>"></iframe>
+  </div>
+</section>

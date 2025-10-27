@@ -1,0 +1,49 @@
+<div
+  class="chat"
+  [class.chat--open]="isOpen()"
+  [class.chat--expanded]="isExpanded()"
+  cdkDrag
+  [cdkDragDisabled]="isExpanded()"
+>
+  <button type="button" class="chat__bubble" (click)="toggleOpen()" *ngIf="!isOpen()">
+    <mat-icon>chat</mat-icon>
+  </button>
+
+  <section class="chat__window" *ngIf="isOpen()">
+    <header class="chat__header">
+      <button mat-icon-button type="button" (click)="toggleOpen()" aria-label="Close chat">
+        <mat-icon>close</mat-icon>
+      </button>
+      <h3>{{ title() }}</h3>
+      <button mat-icon-button type="button" (click)="toggleExpanded()" aria-label="Toggle fullscreen">
+        <mat-icon>{{ isExpanded() ? 'close_fullscreen' : 'open_in_full' }}</mat-icon>
+      </button>
+    </header>
+    <div class="chat__body">
+      <article
+        *ngFor="let message of messages()"
+        class="chat__message"
+        [class.chat__message--user]="message.author === 'user'"
+      >
+        <span class="chat__author">{{ message.author === 'user' ? 'You' : 'Assistant' }}</span>
+        <p class="chat__text">{{ message.text }}</p>
+        <time class="chat__time">{{ message.timestamp | date: 'shortTime' }}</time>
+      </article>
+    </div>
+    <form class="chat__composer" (ngSubmit)="send()">
+      <mat-form-field appearance="outline">
+        <mat-label>Message</mat-label>
+        <textarea
+          matInput
+          rows="2"
+          [(ngModel)]="draft()"
+          (ngModelChange)="draft.set($event)"
+          placeholder="Ask the assistant about your project..."
+        ></textarea>
+      </mat-form-field>
+      <button mat-icon-button color="primary" type="submit" aria-label="Send message">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </section>
+</div>
